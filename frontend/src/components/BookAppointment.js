@@ -148,7 +148,7 @@ const BookAppointment = () => {
 
           <Space direction="vertical">
             <h1>Select Data and Time</h1>
-            <div className="flex w-96  justify-between">
+            <div className="flex w-full md:w-96  justify-between">
               <DatePicker
                 rules={[{ required: true, message: "Please select date!" }]}
                 format={"DD-MM-YYYY"}

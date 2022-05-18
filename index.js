@@ -40,8 +40,10 @@ mongoose
   .catch((err) => console.log(err));
 
 const doctorAppointment = new mongoose.Schema({
+  doctor: String,
   patientName: String,
   patientAge: Number,
+  phone: Number,
   patientGender: String,
   appointmentDate: String,
   appointmentTime: String,
@@ -51,48 +53,94 @@ const Doctor = new mongoose.model("doctorAppointment", doctorAppointment);
 
 //API routes
 
-app.get("/getAllReminder", (req, res) => {
-  Doctor.find({}, (err, reminderList) => {
+app.get("/getAllData", (req, res) => {
+  Doctor.find({}, (err, data) => {
     if (err) {
       console.log(err);
     }
-    if (reminderList) {
-      res.send(reminderList);
+    if (data) {
+      res.send(data);
     }
   });
 });
 
-app.post("/addReminder", (req, res) => {
-  const { reminderMsg, remindAt } = req.body;
-  const reminder = new Reminder({
-    reminderMsg,
-    remindAt,
-    isReminded: false,
+app.post("/book-appointment", async (req, res) => {
+  const {
+    doctor,
+    patientName,
+    patientAge,
+    phone,
+    patientGender,
+    appointmentDate,
+    appointmentTime,
+  } = req.body;
+
+  const newData = new Doctor({
+    doctor,
+    patientName,
+    patientAge,
+    phone,
+    patientGender,
+    appointmentDate,
+    appointmentTime,
   });
-  Doctor.save((err) => {
+
+  await newData.save((err) => {
     if (err) {
       console.log(err);
     }
-    Reminder.find({}, (err, reminderList) => {
+    Doctor.find({}, (err, data) => {
       if (err) {
         console.log(err);
       }
-      if (reminderList) {
-        res.send(reminderList);
+      if (data) {
+        res.send(data);
       }
     });
   });
 });
 
-app.post("/deleteReminder", (req, res) => {
-  Doctor.deleteOne({ _id: req.body.id }, () => {
-    Reminder.find({}, (err, reminderList) => {
+app.post("/delete", (req, res) => {
+  const { id } = req.body;
+  Doctor.findByIdAndDelete(id, (err, data) => {
+    if (err) {
+      console.log(err);
+    }
+    if (data) {
+      res.send(data);
+    }
+  });
+});
+
+app.post("/update", (req, res) => {
+  const {
+    id,
+    doctor,
+    patientName,
+    patientAge,
+    phone,
+    patientGender,
+    appointmentDate,
+    appointmentTime,
+  } = req.body;
+  Doctor.findByIdAndUpdate(
+    id,
+    {
+      doctor,
+      patientName,
+      patientAge,
+      phone,
+      patientGender,
+      appointmentDate,
+      appointmentTime,
+    },
+    (err, data) => {
       if (err) {
         console.log(err);
       }
-      if (reminderList) {
-        res.send(reminderList);
+      if (data) {
+        res.send(data);
       }
-    });
-  });
+    }
+  );
 });
