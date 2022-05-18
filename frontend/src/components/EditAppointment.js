@@ -160,8 +160,8 @@ const EditAppointment = ({ record }) => {
               ]}
             >
               <Select placeholder="select your gender">
-                <Option value="male">Male</Option>
-                <Option value="female">Female</Option>
+                <Option value="Male">Male</Option>
+                <Option value="Female">Female</Option>
               </Select>
             </Form.Item>
 

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Form, Input, Select, Button, DatePicker, Space, Divider } from "antd";
 import { TimePicker } from "antd";
-import moment from "moment";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { LOCAL_HOST } from "../utils/constant";
@@ -140,9 +139,8 @@ const BookAppointment = () => {
             ]}
           >
             <Select placeholder="select your gender">
-              <Option value="male">Male</Option>
-              <Option value="female">Female</Option>
-              <Option value="other">Other</Option>
+              <Option value="Male">Male</Option>
+              <Option value="Female">Female</Option>
             </Select>
           </Form.Item>
 
@@ -163,7 +161,6 @@ const BookAppointment = () => {
                 }}
                 use12Hours
                 format="h:mm a"
-                defaultValue={moment("00:00", "HH:mm")}
               />
             </div>
           </Space>
