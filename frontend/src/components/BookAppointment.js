@@ -25,7 +25,7 @@ const BookAppointment = () => {
       appointmentDate: date,
       appointmentTime: time,
     };
-    console.log(newData);
+
     axios.post(`${LOCAL_HOST}/book-appointment`, newData).then((res) => {
       form.resetFields();
       setTimeout(() => {
@@ -153,14 +153,12 @@ const BookAppointment = () => {
                 rules={[{ required: true, message: "Please select date!" }]}
                 format={"DD-MM-YYYY"}
                 onChange={(date, dateString) => {
-                  console.log(date, dateString);
                   setDate(dateString);
                 }}
               />
               <TimePicker
                 rules={[{ required: true, message: "Please select time!" }]}
                 onChange={(time, timeString) => {
-                  console.log(time, timeString);
                   setTime(timeString);
                 }}
                 use12Hours

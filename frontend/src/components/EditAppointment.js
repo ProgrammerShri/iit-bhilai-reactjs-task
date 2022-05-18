@@ -10,7 +10,6 @@ import {
   Button,
   Space,
 } from "antd";
-import { useNavigate } from "react-router-dom";
 import { LOCAL_HOST } from "../utils/constant";
 import axios from "axios";
 import { MdModeEditOutline } from "react-icons/md";
@@ -19,7 +18,6 @@ const { Option } = Select;
 
 const EditAppointment = ({ record }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const navigate = useNavigate();
   const [form] = Form.useForm();
   const [date, setDate] = useState(record.appointmentDate);
   const [time, setTime] = useState(record.appointmentTime);
@@ -44,7 +42,6 @@ const EditAppointment = ({ record }) => {
       appointmentDate: date,
       appointmentTime: time,
     };
-    console.log(newData);
     axios.post(`${LOCAL_HOST}/update`, newData).then((res) => {
       form.resetFields();
       handleCancel();
@@ -176,7 +173,6 @@ const EditAppointment = ({ record }) => {
                   format={"DD-MM-YYYY"}
                   defaultValue={moment(date, "DD-MM-YYYY")}
                   onChange={(date, dateString) => {
-                    console.log(date, dateString);
                     setDate(dateString);
                   }}
                 />
@@ -186,7 +182,6 @@ const EditAppointment = ({ record }) => {
                   format="h:mm a"
                   defaultValue={moment(time, "h:mm a")}
                   onChange={(time, timeString) => {
-                    console.log(time, timeString);
                     setTime(timeString);
                   }}
                 />
