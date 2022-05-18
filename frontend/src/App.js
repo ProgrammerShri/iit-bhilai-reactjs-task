@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import { HomeRoute } from "./routes/routes";
+import { BookAppointmentRoute, HomeRoute } from "./routes/routes";
 
 function App() {
   return (
@@ -8,6 +8,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomeRoute />} />
+          <Route path="/book-appointment" element={<BookAppointmentRoute />} />
         </Routes>
       </BrowserRouter>
     </div>

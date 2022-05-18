@@ -9,4 +9,15 @@ const HomeRoute = () => {
   );
 };
 
-export { HomeRoute };
+const BookAppointment = React.lazy(() =>
+  import("../components/BookAppointment")
+);
+const BookAppointmentRoute = () => {
+  return (
+    <React.Suspense fallback={<div>Loading...</div>}>
+      <BookAppointment />
+    </React.Suspense>
+  );
+};
+
+export { HomeRoute, BookAppointmentRoute };
